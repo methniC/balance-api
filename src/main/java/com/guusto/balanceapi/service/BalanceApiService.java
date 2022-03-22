@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BalanceApiService {
@@ -19,6 +20,13 @@ public class BalanceApiService {
 
 
     public Balance getBalanceByClientId(long clientId) {
-        return balanceApiRepository.getById(clientId);
+        Optional<Balance> currentBalance = balanceApiRepository.findById(clientId);
+        if(currentBalance.isPresent()) {
+            return balanceApiRepository.getById(clientId);
+        }
+        else {
+            return  new Balance();
+        }
+
     }
 }
