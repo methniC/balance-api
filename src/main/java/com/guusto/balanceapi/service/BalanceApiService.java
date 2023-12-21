@@ -3,6 +3,7 @@ package com.guusto.balanceapi.service;
 import com.guusto.balanceapi.entity.Balance;
 import com.guusto.balanceapi.repository.BalanceApiRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,13 +21,14 @@ public class BalanceApiService {
 
 
     public Balance getBalanceByClientId(long clientId) {
-        Optional<Balance> currentBalance = balanceApiRepository.findById(clientId);
-        if(currentBalance.isPresent()) {
+        List<Balance> currentBalance = balanceApiRepository.getBalanceByClientId(clientId);
+        return currentBalance.get(0);
+        /*if(currentBalance.isPresent()) {
             return balanceApiRepository.getById(clientId);
         }
         else {
             return  new Balance();
-        }
+        }*/
 
     }
 }
