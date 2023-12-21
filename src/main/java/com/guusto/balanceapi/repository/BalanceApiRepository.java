@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface BalanceApiRepository extends JpaRepository<Balance,Long> {
-
+//Adding comment
     @Query( value = "select * from balance u where u.client_id = :cliID and u.balance > 0 " , nativeQuery = true)
      List<Balance> getBalanceByClientId(@Param("cliID") long clientId);
 
